@@ -1,0 +1,13 @@
+.row
+	=form_for @user do |f|
+		=render partial:"shared/error_messages", locals: {model: @user}
+		.user-name
+			=f.text_field :name, placeHolder: 'user name'
+		.user-email
+			=f.email_field :email, placeHolder: 'email'
+		.user-password
+			=f.password_field :password, placeHolder: 'password'
+		.user-password
+			=f.password_field :password_confirmation, placeHolder: 'password again'
+		.footer
+			=f.submit "create account", class: "btn btn-large btn-primary"

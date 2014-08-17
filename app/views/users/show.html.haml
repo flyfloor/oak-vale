@@ -1,0 +1,5 @@
+.user-page
+	%section.user-info
+		=gravatar_image_tag(@user.email, alt:"#{@user.email}")
+		%h2=@user.name
+	=render 'shared/stats'

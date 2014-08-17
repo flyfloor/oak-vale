@@ -1,0 +1,15 @@
+-provide(:title, "Sign up")
+%article
+	%h1 Edit account
+	.row
+	=form_for @user do |f|
+		=render partial: "shared/error_messages", locals: {model: @user}
+		.user-name
+			=f.text_field :name, placeHolder: "user name"
+		.user-email
+			=f.email_field :email, placeHolder: "email", disabled: true
+			=f.label "email can't change", for: "email"
+		.footer
+			=f.submit "create account", class: "btn btn-large btn-primary"
+	=gravatar_image_tag(@user.email, alt:"#{@user.email}")
+	=link_to "go to gravatar change avatar", "http://gravatar.com/emails", target: "_blank"

@@ -1,0 +1,6 @@
+.edit-post
+	%h2 Edit post
+	%section
+		=render "form"
+	.tag-editor.field
+		=render partial: 'tags/edit_tag', locals: {model: @post}

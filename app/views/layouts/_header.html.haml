@@ -1,0 +1,6 @@
+=link_to "home", root_path
+-if signed_in?
+	=link_to "profile", current_user
+	=link_to "sign out", signout_path, method: "delete"
+-else
+	=link_to "sign in", signin_path

@@ -1,0 +1,6 @@
+%ul
+	-@users.each do |user|
+		%li
+			=gravatar_image_tag(user.email, alt:"#{user.email}")
+			=user.name
+	=will_paginate @posts

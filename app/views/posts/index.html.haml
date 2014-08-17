@@ -1,0 +1,9 @@
+.post-list
+	%ul
+		-@posts.each do |post|
+			%li
+				.post-main
+					=link_to post.title, post
+					-if current_user? post.user
+						=link_to 'delete', post, method: :delete, remote: true, class: 'delete-post'
+		=will_paginate @posts

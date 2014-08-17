@@ -1,0 +1,8 @@
+-if model.errors.any?
+	#error_explanation
+		.alert.alert-error
+			The form contains
+			=pluralize(model.errors.count, "error")
+		%ul
+			-model.errors.full_messages.each do |msg|
+				%li=msg

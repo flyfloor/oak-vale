@@ -1,0 +1,7 @@
+-provide(:title, 'Sign up')
+.article-editor
+	%article
+		%h1 Sign in
+		=render 'form'
+		%p New user?
+		=link_to "Sign up now!", signup_path

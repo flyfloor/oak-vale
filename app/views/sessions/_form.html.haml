@@ -1,0 +1,13 @@
+.row
+	=form_for(:session, url: sessions_path) do |f|
+		.field
+			=f.email_field :email, placeHolder: 'email'
+		.field
+			=f.password_field :password, placeHolder: 'password'
+		.field
+			=check_box_tag :remember_me, 1
+			=label_tag :remember_me
+		%p
+			=link_to "forgotten password?", new_password_reset_path
+		.footer
+			=f.submit "sign in", class: "btn btn-large btn-primary"

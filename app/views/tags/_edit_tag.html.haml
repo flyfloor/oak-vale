@@ -1,0 +1,14 @@
+%h4.italic Label a tag
+.tag-picker
+	.selected-tags
+		.tag-input
+			%input#new-tag{type:'text', placeholder: 'Add a label'}
+		%input#hid_tag{type: 'hidden', name: 'tags'}
+		%input#hid_swap{type: 'hidden'}
+		-if model.tags.present?
+			-model.tags.each do |tag|
+				%tag.sld-tag=tag.name
+	.exist-tags
+		%p.italic All existed tags	
+		-Tag.all.each do |tag|
+			%tag.ext-tag=tag.name

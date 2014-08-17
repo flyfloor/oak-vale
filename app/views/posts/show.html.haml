@@ -1,0 +1,6 @@
+.page-page
+	%section.page-info
+		%h2=@post.title
+		=image_tag(@post.photo)
+		-if current_user? @post.user
+			=link_to 'delete', @post, method: :delete, class: 'delete-post'

@@ -1,0 +1,7 @@
+-if current_user
+	%ul
+		-@list.each do |item|
+			%li
+				=item.user.name
+				=item.title
+				=image_tag(item.photo)
