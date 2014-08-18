@@ -17,17 +17,15 @@ class User < ActiveRecord::Base
 
   before_save {|user| user.email = email.downcase}
   before_create {create_token(:remember_token)}
-  default_scope order: 'created_at DESC'
+  scope :timeline, -> {order(created_at: :desc)}
 
+  def feed
+    Post.from_followed_by self
+  end
 
   def recent_posts(count = 6)
-    self.posts_by_time.limit(count)
+    self.posts.timeline.limit(count)
   end
-
-  def posts_by_time
-    self.posts
-  end
-
 
   def create_token column
 		begin
