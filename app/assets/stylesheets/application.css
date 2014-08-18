@@ -17,18 +17,4 @@
 	margin: 0 auto;
 }
 
-.pagination .current, .pagination .disabled {
-	float: left;
-	padding: 0 14px;
-	line-height: 34px;
-	text-decoration: none;
-	color: #999;
-}
-
-.pagination .current {
-	border: 1px solid #eee;
-	border-left-width: 0;
-	background-color: #eee;
-  text-shadow: rgba(255, 255, 255, 0.8) 1px 1px 1px; 
-}
 
