@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
 
   before_save {|user| user.email = email.downcase}
   before_create {create_token(:remember_token)}
+  default_scope order: 'created_at DESC'
 
 
   def recent_posts(count = 6)
@@ -24,7 +25,7 @@ class User < ActiveRecord::Base
   end
 
   def posts_by_time
-    self.posts.order("created_at DESC")
+    self.posts
   end
 
 
@@ -41,17 +42,17 @@ class User < ActiveRecord::Base
     UserMailer.password_reset(self).deliver
   end
 
-  def following? other_user
-    relationships.find_by(followed_id: other_user.id)
+  def following? user
+    relationships.find_by(followed_id: user.id)
   end
 
-  def follow! other_user
-    relationships.create!(followed_id: other_user.id)
+  def follow! user
+    relationships.create!(followed_id: user.id)
   end
 
 
-  def unfollow! other_user
-    relationships.find_by(followed_id: other_user.id).destroy
+  def unfollow! user
+    relationships.find_by(followed_id: user.id).destroy
   end
 
 end

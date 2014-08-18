@@ -13,12 +13,7 @@ OakVale::Application.routes.draw do
 
   #sign up
   get '/signup' => 'users#new'
-
   post 'posts/:id/like' => 'posts#like'
-
-  
-  post '/upload' => 'application#upload'
-  resources :tags
 
   resources :users, only: [:index, :show, :edit, :update, :create] do
     get 'posts' => 'posts#index'
@@ -26,12 +21,15 @@ OakVale::Application.routes.draw do
       get 'followers', 'following'
     end
   end
+  resources :relationships, only: [:create, :destroy]
+  resources :password_resets
 
   resources :posts do
     resources :comments
   end
+  
+  resources :tags
 
-  resources :password_resets
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

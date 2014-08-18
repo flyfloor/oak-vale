@@ -11,12 +11,17 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.timeago
+//= require jquery.timeago.zh-CN
 //= require jquery_ujs
 //= require bootstrap
 //= require turbolinks
 //= require_tree .
 
 $(document).ready(function(){
+
+	// timeago
+	$("abbr.timeago").timeago();
 
 		//Tag part
 	var Tag = function(){
@@ -111,18 +116,4 @@ $(document).ready(function(){
 			};
 		});
 
-
-		$(".subcheck").on("keypress", stopSubmit); 
-
-		function stopSubmit(event){
-			var _keyCode = event.which? event.which : event.keyCode;
-			if(_keyCode == 13){
-				if(event && event.preventDefault){
-					event.preventDefault();
-				}else{
-					window.event.returnValue = false;
-				}
-				return false;
-			}
-		}
 });

@@ -65,7 +65,7 @@ class PostsController < ApplicationController
 		end
 
 		def tag_params
-			params.require(:tags)
+			params["tags"]
 		end
 
 		def find_post
@@ -84,10 +84,8 @@ class PostsController < ApplicationController
 			redirect_to root_path, notice: "Forbidden" unless your_post?
 		end
 
-		private
 		def label_tag(post, tags)
 			for tag in tags do
-				binding.pry
 				@exist_tag = Tag.where("name = ?", tag.to_s)
 				if @exist_tag.blank?
 					post.tags << Tag.new(name: tag.to_s)

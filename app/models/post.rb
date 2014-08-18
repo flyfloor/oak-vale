@@ -6,10 +6,13 @@ class Post < ActiveRecord::Base
   validates :content, presence: true
   validates :photo, presence: true
   mount_uploader :photo, GalleryUploader
+  default_scope order: 'created_at DESC'
 
 
   def self.from_followed_by user
-  	where("user_id IN (?) OR user_id = ?", user.followed_user_ids, user).order("created_at DESC")
+    followed_user_ids = "SELECT followed_id FROM relationships
+                     WHERE follower_id = :user_id"
+  	where("user_id IN (#{followed_user_ids}) OR user_id = :user_id", user_id: user.id)
   end
   
 end
