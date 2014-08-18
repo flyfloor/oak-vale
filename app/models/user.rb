@@ -19,6 +19,15 @@ class User < ActiveRecord::Base
   before_create {create_token(:remember_token)}
 
 
+  def recent_posts(count = 6)
+    self.posts_by_time.limit(count)
+  end
+
+  def posts_by_time
+    self.posts.order("created_at DESC")
+  end
+
+
   def create_token column
 		begin
       self[column] = SecureRandom.urlsafe_base64

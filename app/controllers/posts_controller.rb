@@ -4,15 +4,17 @@ class PostsController < ApplicationController
 	before_filter :correct_post, only: [:edit, :update, :destroy]
 
 	def index
-		@posts = post_author.posts.paginate(page: params[:page], per_page: 10)
+		@posts = post_author.posts_by_time.paginate(page: params[:page], per_page: 10)
 	end
 
 	def new
 		@post = Post.new
 	end
 
-	def create
+	def create		
 		@post = current_user.posts.build(post_params)
+		label_tag(@post, tag_params.split('#tag#'))
+
 		if @post.save
 			flash[:success] = "Post created"
 			redirect_back_or @post
@@ -62,6 +64,10 @@ class PostsController < ApplicationController
 			params.require(:post).permit(:title, :content, :photo, :user_id)
 		end
 
+		def tag_params
+			params.require(:tags)
+		end
+
 		def find_post
 			@post = Post.find params[:id]
 		end
@@ -76,5 +82,18 @@ class PostsController < ApplicationController
 
 		def correct_post
 			redirect_to root_path, notice: "Forbidden" unless your_post?
+		end
+
+		private
+		def label_tag(post, tags)
+			for tag in tags do
+				binding.pry
+				@exist_tag = Tag.where("name = ?", tag.to_s)
+				if @exist_tag.blank?
+					post.tags << Tag.new(name: tag.to_s)
+				else
+					post.tags << @exist_tag
+				end
+			end
 		end
 end

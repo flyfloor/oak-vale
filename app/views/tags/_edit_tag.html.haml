@@ -3,7 +3,7 @@
 	.selected-tags
 		.tag-input
 			%input#new-tag{type:'text', placeholder: 'Add a label'}
-		%input#hid_tag{type: 'hidden', name: 'tags'}
+		%input#hid_tag{type: 'hidden', name: "tags"}
 		%input#hid_swap{type: 'hidden'}
 		-if model.tags.present?
 			-model.tags.each do |tag|
