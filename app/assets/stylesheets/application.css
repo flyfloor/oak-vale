@@ -18,7 +18,8 @@
 }
 
 abbr[title] {
-	cursor: default;
+	cursor: default !important;
+	border: none !important;
 }
 
 

@@ -4,7 +4,7 @@ class PostsController < ApplicationController
 	before_filter :correct_post, only: [:edit, :update, :destroy]
 
 	def index
-		@posts = post_author.posts_by_time.paginate(page: params[:page], per_page: 10)
+		@posts = post_author.posts.timeline.paginate(page: params[:page], per_page: 10)
 	end
 
 	def new
@@ -32,12 +32,29 @@ class PostsController < ApplicationController
 		end
 	end
 
-	def edit
-	end
-
 	def show
-
+		@user = @post.user
 	end
+
+
+	def like
+		@post = Post.find(params[:id])
+
+		if current_user.like? @post
+			@post.like_count -= 1 unless @post.like_count == 0
+			current_user.unlike! @post
+		else
+			@post.like_count += 1
+			current_user.like! @post
+		end
+		@post.save
+		
+		respond_to do |format|
+			format.html {redirect_to @post}
+			format.js
+		end
+	end
+
 
 	def destroy
 		respond_to do |format|

@@ -22,3 +22,13 @@ textarea {
 h1, h2, h3, h4, h5, h6 {
   line-height: 1;
 }
+
+ul li {
+	display: inline-block;
+	list-style-type: none;
+}
+
+article ul li {
+	display: list-item;
+	list-style-type: disc;
+}

@@ -1,12 +1,8 @@
 class UsersController < ApplicationController
 
 	before_filter :sign_in_user, only: [:edit, :update]
-	before_filter :find_user, only: [:show, :edit, :update, :following, :followers]
+	before_filter :find_user, only: [:show, :edit, :update, :following, :followers, :favorites]
 	before_filter :correct_user, only: [:edit, :update]
-
-	def index
-		@users = User.paginate(page: params[:page], per_page: 3)
-	end
 
 	def new
 		if signed_in?
@@ -21,7 +17,7 @@ class UsersController < ApplicationController
 		if @user.save
 			flash[:success] = "Welcome to the Oak Vale!"
 			sign_in_permanent @user
-			redirect_back_or @user
+			redirect_to @user
 		else
 			render 'new'
 		end
@@ -42,7 +38,12 @@ class UsersController < ApplicationController
 	end
 
 	def show
+		@recent_posts = @user.recent_posts
+		@last_likes =  @user.likes_feed(5)
+	end
 
+	def favorites
+		@like_items = @user.likes_feed
 	end
 
 	def following
@@ -65,11 +66,7 @@ class UsersController < ApplicationController
 		end
 
 		def find_user
-			@user = User.find(params[:id])	
-		end
-
-		def user_paginate_opt
-			{page: params[:page], per_page: 30}
+			@user = User.find(params[:id])
 		end
 
 		def correct_user

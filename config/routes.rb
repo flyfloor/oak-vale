@@ -5,6 +5,7 @@ OakVale::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'application#index'
+  get '/hot' => 'application#hot'
 
   #sign
   resources :sessions, only:[:new, :create, :destroy]
@@ -13,21 +14,31 @@ OakVale::Application.routes.draw do
 
   #sign up
   get '/signup' => 'users#new'
-  post 'posts/:id/like' => 'posts#like'
 
-  resources :users, only: [:index, :show, :edit, :update, :create] do
+  #users
+  get 'users/:id/favorites' => 'users#favorites'
+
+  resources :users, only: [:show, :edit, :update, :create, :favorites] do  
     get 'posts' => 'posts#index'
     member do
       get 'followers', 'following'
     end
   end
-  resources :relationships, only: [:create, :destroy]
+
+  #settings
   resources :password_resets
 
+  #relationships
+  resources :relationships, only: [:create, :destroy]
+
+  #posts
   resources :posts do
     resources :comments
   end
-  
+
+  post 'posts/:id/like' => 'posts#like'
+
+  #tags
   resources :tags
 
 

@@ -10,6 +10,6 @@
 	.post-content
 		=f.text_area :content, placeHolder: "take a note"
 	.tag-editor.field
-		=render partial: 'tags/edit_tag', locals: {model: @post}
+		=render partial: 'tags/label_tag', locals: {model: @post}
 	.actions
 		=f.submit "submit"

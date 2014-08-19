@@ -1,3 +1,4 @@
+-provide(:title, 'Reset password')
 =form_for @user, url: password_reset_path(params[:id]) do |f|
   =render partial: "shared/error_messages", locals: {model: @user}
   .field

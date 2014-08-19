@@ -1,0 +1,12 @@
+-if current_user
+	.like_post{class: current_user.like?(model) && "liked"}
+		=link_to '喜欢', "/posts/#{model.id}/like", method: :post, remote: true, class: 'like_btn'
+		%span.like_count
+			=model.like_count
+			%i.icon-heart-empty
+-else
+	.like_post
+		=link_to '喜欢', signin_path
+		%span.like_count
+			=model.like_count
+			%i.icon-heart-empty

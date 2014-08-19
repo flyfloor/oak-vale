@@ -1,6 +1,7 @@
+-provide(:title, @post.title)
 .post-page
 	%section.post-info
-		%h2=@post.title
-		=image_tag(@post.photo)
-		-if current_user? @post.user
-			=link_to 'delete', @post, method: :delete, class: 'delete-post'
+		=render @post
+	%section.user-info
+		%h3 作者信息
+		=render partial: "users/user_cell", locals: {model: @user}

@@ -6,7 +6,11 @@ class ApplicationController < ActionController::Base
   include ApplicationHelper, SessionsHelper
 
   def index
-    @list = current_user.feed.paginate(index_paginate_opt) if current_user
+    @feed = current_user.feed.paginate(index_paginate_opt) if current_user
+  end
+
+  def hot
+    @posts = Post.hot
   end
 
 

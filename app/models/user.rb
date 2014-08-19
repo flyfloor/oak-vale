@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
   has_many :followed_users, through: :relationships, source: :followed
   has_many :followers, through: :reverse_relationships, source: :follower
 
+  has_many :like_posts, foreign_key: "user_id", dependent: :destroy, class_name: "UserWithPost"
+
 	validates :name, presence: true, uniqueness: true, length: {in: 5..30}
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, uniqueness: true, format: {with: VALID_EMAIL_REGEX }
@@ -21,6 +23,10 @@ class User < ActiveRecord::Base
 
   def feed
     Post.from_followed_by self
+  end
+
+  def likes_feed(limit = nil)
+    Post.liked_by(self).limit(limit)
   end
 
   def recent_posts(count = 6)
@@ -51,6 +57,19 @@ class User < ActiveRecord::Base
 
   def unfollow! user
     relationships.find_by(followed_id: user.id).destroy
+  end
+
+
+  def like? post
+    like_posts.find_by(post_id: post.id)    
+  end
+
+  def like! post
+    like_posts.create!(post_id: post.id)
+  end
+
+  def unlike! post
+    like_posts.find_by(post_id: post.id).destroy  
   end
 
 end

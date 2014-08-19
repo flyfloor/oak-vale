@@ -1,10 +1,8 @@
+-provide(:title, 'Home')
 -if current_user
 	%ul
-		-@list.each do |item|
+		-@feed.each do |post|
 			%li
-				=gravatar_image_tag(item.user.email, alt:"#{item.user.email}")
-				=link_to item.user.name, user_path(item.user)
-				=item.title
-				=timeago(item.created_at)
-				=image_tag(item.photo)
-				=item.content
+				=render partial: "users/user_cell", locals: {model: post.user}
+				=render partial: "posts/post_cell", locals: {model: post}
+		=will_paginate @feed
