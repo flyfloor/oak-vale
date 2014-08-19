@@ -1,7 +1,7 @@
 class Post < ActiveRecord::Base
   belongs_to :user
   has_many :comments, dependent: :destroy
-  has_many :tags
+  has_and_belongs_to_many :tags
   has_many :like_posts, foreign_key: "post_id", dependent: :destroy, class_name: "UserWithPost"
 
   validates :title, presence: true

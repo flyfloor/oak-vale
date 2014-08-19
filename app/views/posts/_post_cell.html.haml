@@ -4,5 +4,7 @@
 	=image_tag(model.photo)
 	=model.content
 	=render partial: 'posts/like_post', locals: {model: model}
+	-if model.tags.present?
+		=render partial: 'tags/tags', locals: {model: model.tags}
 	-if(current_user && current_user?(model.user))
 		=link_to 'delete', model, method: :delete, remote: true, class: 'delete-post'

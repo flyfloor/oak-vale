@@ -1,7 +1,7 @@
 -provide(:title, @post.title)
 .post-page
 	%section.post-info
-		=render @post
+		=render partial: "posts/post_cell", locals: {model: @post}
 	%section.user-info
 		%h3 作者信息
 		=render partial: "users/user_cell", locals: {model: @user}

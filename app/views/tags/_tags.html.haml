@@ -1,4 +1,2 @@
--unless model.tags.blank?
-	%h4 标签:
-	%tags 
-		=render model.tags
+-model.each do |tag|
+	=render partial: "tags/tag_cell", locals:{model: tag }

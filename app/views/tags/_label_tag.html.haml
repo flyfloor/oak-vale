@@ -1,4 +1,4 @@
-%h4.italic Label a tag
+%h4.italic 贴标签分个类吧！
 .tag-picker
 	.selected-tags
 		.tag-input
@@ -7,7 +7,7 @@
 		%input#hid_swap{type: 'hidden'}
 		-if model.tags.present?
 			-model.tags.each do |tag|
-				%tag.sld-tag=tag.name
+				%tag.tag=tag.name
 	.exist-tags
 		%p.italic All existed tags	
 		-Tag.all.each do |tag|

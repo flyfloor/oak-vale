@@ -1,7 +1,10 @@
-=link_to "home", root_path
-=link_to "hot", hot_path
--if signed_in?
-	=link_to "profile", current_user
-	=link_to "sign out", signout_path, method: "delete"
--else
-	=link_to "sign in", signin_path
+%nav.navbar.navbar-default.navbar-static-top{role: "navigation"}
+	.container
+		=link_to "首页", root_path
+		=link_to "热门", hot_path
+		-if signed_in?
+			=link_to "个人", current_user
+			=link_to "集合", tags_path
+			=link_to "退出", signout_path, method: "delete"
+		-else
+			=link_to "登录", signin_path
