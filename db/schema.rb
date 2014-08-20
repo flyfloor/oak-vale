@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140819153958) do
+ActiveRecord::Schema.define(version: 20140820124008) do
 
   create_table "comments", force: true do |t|
     t.string   "commenter"
@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 20140819153958) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "photo"
-    t.integer  "like_count"
+    t.integer  "like_count", default: 0
   end
 
   add_index "posts", ["like_count"], name: "index_posts_on_like_count", using: :btree
@@ -52,11 +52,25 @@ ActiveRecord::Schema.define(version: 20140819153958) do
   add_index "relationships", ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true, using: :btree
   add_index "relationships", ["follower_id"], name: "index_relationships_on_follower_id", using: :btree
 
+  create_table "subscriptions", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "tag_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "subscriptions", ["tag_id"], name: "index_subscriptions_on_tag_id", using: :btree
+  add_index "subscriptions", ["user_id", "tag_id"], name: "index_subscriptions_on_user_id_and_tag_id", unique: true, using: :btree
+  add_index "subscriptions", ["user_id"], name: "index_subscriptions_on_user_id", using: :btree
+
   create_table "tags", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "subscriber_count", default: 0
   end
+
+  add_index "tags", ["subscriber_count"], name: "index_tags_on_subscriber_count", using: :btree
 
   create_table "user_with_posts", force: true do |t|
     t.datetime "created_at"

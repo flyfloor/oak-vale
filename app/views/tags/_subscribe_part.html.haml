@@ -1,0 +1,10 @@
+-if current_user
+	.subscribe{class: current_user.subscribe?(model) && "subscribed"}
+		=link_to '订阅', "/tags/#{model.id}/subscribe", method: :post, remote: true, class: 'subscribe_btn'
+		%span
+			%i.icon-heart-plus
+-else
+	.subscribe
+		=link_to '订阅', signin_path
+		%span
+			%i.icon-heart-plus

@@ -1,7 +1,7 @@
 =form_for @post, html: {multipart: true} do |f|
 	=render partial: "shared/error_messages", locals: {model: @post}
 	.post-photo
-		=label_tag "photo", "My Photo"
+		=label_tag "photo", "上传图片"
 		=image_tag(@post.photo)
 		=f.file_field :photo
 		=f.hidden_field :photo_cache
@@ -12,4 +12,4 @@
 	.tag-editor.field
 		=render partial: 'tags/label_tag', locals: {model: @post}
 	.actions
-		=f.submit "submit"
+		=f.submit "发布", class: "btn btn-primary"

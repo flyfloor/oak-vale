@@ -36,6 +36,7 @@ OakVale::Application.routes.draw do
     resources :comments
   end
 
+  post 'tags/:id/subscribe' => 'tags#subscribe'
   post 'posts/:id/like' => 'posts#like'
 
   #tags

@@ -16,7 +16,7 @@ class PostsController < ApplicationController
 		label_tag(@post, tag_params.split('#tag#'))
 
 		if @post.save
-			flash[:success] = "已创建"
+			flash[:success] = "Post created"
 			redirect_back_or @post
 		else
 			render 'new'
@@ -25,7 +25,7 @@ class PostsController < ApplicationController
 
 	def update
 		if @post.update_attributes(post_params)
-			flash[:success] = "已更新"
+			flash[:success] = "Post updated"
       redirect_to @post
 		else
 		  render 'edit'

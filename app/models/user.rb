@@ -10,6 +10,9 @@ class User < ActiveRecord::Base
 
   has_many :like_posts, foreign_key: "user_id", dependent: :destroy, class_name: "UserWithPost"
 
+  has_many :subscriptions, foreign_key: "user_id", dependent: :destroy
+  has_many :tags, through: :subscriptions
+
 	validates :name, presence: true, uniqueness: true, length: {in: 5..30}
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, uniqueness: true, format: {with: VALID_EMAIL_REGEX }
@@ -46,6 +49,7 @@ class User < ActiveRecord::Base
     UserMailer.password_reset(self).deliver
   end
 
+  #relationship
   def following? user
     relationships.find_by(followed_id: user.id)
   end
@@ -59,7 +63,7 @@ class User < ActiveRecord::Base
     relationships.find_by(followed_id: user.id).destroy
   end
 
-
+  #like post
   def like? post
     like_posts.find_by(post_id: post.id)    
   end
@@ -70,6 +74,19 @@ class User < ActiveRecord::Base
 
   def unlike! post
     like_posts.find_by(post_id: post.id).destroy  
+  end
+
+  #subscribe
+  def subscribe? tag
+    subscriptions.find_by(tag_id: tag.id)
+  end
+  
+  def subscribe! tag
+    subscriptions.create!(tag_id: tag.id)  
+  end
+
+  def unsubscribe! tag
+    subscriptions.find_by(tag_id: tag.id).destroy
   end
 
 end

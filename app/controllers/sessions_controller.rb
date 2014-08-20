@@ -18,14 +18,14 @@ class SessionsController < ApplicationController
 			flash[:success] = 'Welcome back, ' + @user.name
 			redirect_to @user
 		else
-			flash[:error] = '不正确的Email及密码组合！' 
+			flash[:error] = 'Invalid email/password' 
       render 'new'
 		end
 	end
 
 	def destroy
 		sign_out
-		flash[:success] = "已退出"
+		flash[:success] = "Sign out"
 		redirect_to root_path
 	end
 

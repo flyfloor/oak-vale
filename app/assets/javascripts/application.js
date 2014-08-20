@@ -12,14 +12,12 @@
 //
 //= require jquery
 //= require jquery.timeago
-//= require jquery.timeago.zh-CN
 //= require jquery_ujs
 //= require bootstrap
 //= require turbolinks
 //= require_tree .
 
 $(document).ready(function(){
-
 	// timeago
 	$("abbr.timeago").timeago();
 

@@ -15,7 +15,7 @@ class UsersController < ApplicationController
 		@user = User.new(user_params)
 
 		if @user.save
-			flash[:success] = "欢迎来到Oak Vale!"
+			flash[:success] = "Welcome to Oak Vale!"
 			sign_in_permanent @user
 			redirect_to @user
 		else
@@ -25,7 +25,7 @@ class UsersController < ApplicationController
 
 	def update
 		if @user.update_attributes(update_user_params)
-			flash[:success] = "个人信息已更新！"
+			flash[:success] = "Profile updated"
       sign_in_permanent @user
       redirect_to @user
 		else
