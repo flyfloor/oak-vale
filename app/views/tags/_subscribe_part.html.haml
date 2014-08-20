@@ -1,10 +1,13 @@
--if current_user
-	.subscribe{class: current_user.subscribe?(model) && "subscribed"}
-		=link_to '订阅', "/tags/#{model.id}/subscribe", method: :post, remote: true, class: 'subscribe_btn'
-		%span
-			%i.icon-heart-plus
--else
-	.subscribe
-		=link_to '订阅', signin_path
-		%span
-			%i.icon-heart-plus
+%tag
+	.content
+		=link_to model.name, tag_path(model)
+	-if signed_in?
+		-if  current_user.subscribe?(model)
+			=link_to "/tags/#{model.id}/subscribe", id: model.id, class: 'subscribe_btn', method: :post, remote: true, class: "subscribed" do
+				=render 'tags/unsubscribe'
+		-else 
+			=link_to "/tags/#{model.id}/subscribe", id: model.id, class: 'subscribe_btn', method: :post, remote: true do
+				=render 'tags/subscribe'
+	-else
+		=link_to signin_path, class: "subscribe_btn" do
+			=render 'tags/subscribe'

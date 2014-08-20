@@ -1,2 +1,6 @@
-var $action_btn = $("#<%= @tag.id %>").find("a.subscribe_btn")
-$action_btn.parent(".subscribe").toggleClass("subscribed")
+var $sub_btn = $("#<%= @tag.id %>");
+if ($sub_btn.hasClass("subscribed")) {
+	$sub_btn.removeClass("subscribed").html("<%= escape_javascript(render('tags/subscribe')) %>")
+}else{
+	$sub_btn.addClass("subscribed").html("<%= escape_javascript(render('tags/unsubscribe')) %>")
+}

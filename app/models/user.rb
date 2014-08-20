@@ -78,7 +78,7 @@ class User < ActiveRecord::Base
 
   #subscribe
   def subscribe? tag
-    subscriptions.find_by(tag_id: tag.id)
+    subscriptions.find_by(tag_id: tag.id) if self.present?
   end
   
   def subscribe! tag

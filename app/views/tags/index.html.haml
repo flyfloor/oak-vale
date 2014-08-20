@@ -1,5 +1,3 @@
 %h3分类
 -@tags.each do |tag|
-	=link_to tag.name, tag_path(tag)
-	.subscribe
-		=render partial: 'tags/subscribe_part', locals: {model: tag}
+	=render partial: 'tags/subscribe_part', locals: {model: tag}
