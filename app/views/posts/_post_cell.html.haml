@@ -5,9 +5,9 @@
 			发布于
 			=timeago(model.created_at)
 	%figure.field
-		.figure-content
-			.field=image_tag(model.photo)
-			%quote.field=model.content
+		=image_tag(model.photo)
+	.figure-content
+		%quote.field=model.content
 	=render partial: 'posts/like_post', locals: {model: model}
 	-if model.tags.present?
 		=render partial: 'tags/tags', locals: {model: model.tags}

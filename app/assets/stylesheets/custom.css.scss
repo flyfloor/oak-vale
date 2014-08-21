@@ -95,7 +95,7 @@ aside {
   position: absolute !important;
   top: 0;
   right: 0;
-  width: 220px; 
+  width: 230px; 
 }
 
 code {
@@ -147,7 +147,8 @@ quote {
   color: #777;
   font-size: 14px;
   display: block;
-  background: #f5f5f5;
+  word-break: break-word;
+  border: 1px dashed #ccc;
 }
 
 quote:before{
@@ -156,33 +157,25 @@ quote:before{
   left: 10px;
   top: -20px;
   border-width: 10px;
-  border-style: solid;
-  border-color: transparent transparent #f5f5f5 transparent;
+  border-style: dashed;
+  border-color: transparent transparent #ccc transparent;
+}
+quote:after{
+  content: '';
+  position: absolute;
+  left: 11px;
+  top: -18px;
+  border-width: 9px;
+  border-style: dashed;
+  border-color: transparent transparent #fff transparent;
 }
 
-
-.heart-trans {
-  -webkit-animation-name: heart-trans;
-  -moz-animation-name: heart-trans;
-  -webkit-animation-duration: 1s;
-  -moz-animation-duration: 1s;
-}
-
-@-webkit-keyframes heart-trans {
-  50%{-webkit-transform: scale(1.6);}
-  100%{-webkit-transform: scale(1);}
-}
-@-moz-keyframes heart-trans {
-  50%{-moz-transform: scale(1.6);}
-  100%{-moz-transform: scale(1);}
-}
-
-@keyframes heart-trans {
-  50%{transform: scale(1.6);}
-  100%{transform: scale(1);}
-}
 
 /*all pages basic*/
+.greenlight{
+  color: #51FF9D;
+}
+
 a.action {
   font-size: 14px;
   text-decoration: none !important;
@@ -391,6 +384,7 @@ article .content ol li {
 }
 
 .link_to_more::after {
+  font-family:fontAwesome;
   content: "\f101";
 }
 
@@ -468,12 +462,14 @@ li.comment-item+li.comment-item {
 /*index page*/
 .index-page{
   article {
-    margin-left: 100px;
+    margin-left: 120px;
   }
   section.user-info {
     float: left;
     margin: 0 10px;
     padding: 10px;
+    text-align:center;
+    width:120px; 
   }
 
   .user-info figure img {
@@ -524,6 +520,9 @@ li.comment-item+li.comment-item {
   .user-posts{
     float: left;
     margin-left: 220px;
+    article{
+      min-height: 400px;
+    }
   }
 }
 
@@ -532,26 +531,26 @@ li.comment-item+li.comment-item {
 .hot-page{
   li {
     float: left;
-    margin: 0 10px;
+    margin: 10px;
     width: 300px;
     overflow:hidden;
     article {
       width: 100%;
-      min-height: 380px;
-      height: 100%;
+      height: 380px;
       figure{
         width: 100%;
-        height: 250px;
+        height: 60%;
         position: relative;
-        .figure-content{
+        overflow: hidden;
+        img{
           max-width: 100%;
-          max-height: 100%;
           margin: auto;
           position: absolute;
           top: 0;
           left: 0;
           bottom: 0;
           right: 0;
+          border: none;
         }
       }
     }
