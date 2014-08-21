@@ -1,7 +1,7 @@
 -provide(:title, '登录')
-.article-editor
-	%article
-		%h1 登录
-		=render 'form'
-		%p 还没账号？
-		=link_to "现在注册!", signup_path
+.sign_module
+	.field
+		%h2 登录
+	=render 'form'
+	%span 还没账号？
+	=link_to "注册", signup_path

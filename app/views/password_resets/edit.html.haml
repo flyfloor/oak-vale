@@ -1,11 +1,12 @@
 -provide(:title, 'Reset password')
-=form_for @user, url: password_reset_path(params[:id]) do |f|
-  =render partial: "shared/error_messages", locals: {model: @user}
-  .field
-    =f.label :password
-    =f.password_field :password
-  .field
-    = f.label :password_confirmation
-    = f.password_field :password_confirmation
-  .actions
-    = f.submit "Update Password"
+.sign_module
+	=form_for @user, url: password_reset_path(params[:id]) do |f|
+	  =render partial: "shared/error_messages", locals: {model: @user}
+	  .field
+	    =f.label :password
+	    =f.password_field :password
+	  .field
+	    = f.label :password_confirmation
+	    = f.password_field :password_confirmation
+	  .actions
+	    = f.submit "更新密码", class: "submit-btn"

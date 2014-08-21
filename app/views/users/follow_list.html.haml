@@ -3,4 +3,3 @@
 	-@users.each do |user|
 		%li
 			=render partial: "users/user_cell", locals: {model: user}
-	=will_paginate @users

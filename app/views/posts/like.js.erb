@@ -1,6 +1,7 @@
-var $action_btn = $("#<%= @post.id %>").find("a.like_btn")
-$action_btn.parent(".like_post").toggleClass("liked")
+var $action_btn = $("#<%= @post.id %>")
 $action_btn.siblings(".like_count").html('<%= @post.like_count %>')
-<% if @post %>
-console.log(<%= @post.id %>)
-<% end %>
+if ($action_btn.hasClass("liked")) {
+	$action_btn.removeClass("liked").html("<%= escape_javascript(render('posts/like')) %>")
+}else{
+	$action_btn.addClass("liked").html("<%= escape_javascript(render('posts/unlike')) %>")
+}

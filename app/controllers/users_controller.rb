@@ -38,8 +38,8 @@ class UsersController < ApplicationController
 	end
 
 	def show
-		@recent_posts = @user.recent_posts
-		@last_likes =  @user.likes_feed(5)
+		@recent_posts = @user.recent_posts(3)
+		@last_likes =  @user.likes_feed(3)
 	end
 
 	def favorites
@@ -47,12 +47,12 @@ class UsersController < ApplicationController
 	end
 
 	def following
-		@users = @user.followed_users.paginate(user_paginate_opt)
+		@users = @user.followed_users
 		render 'follow_list'
 	end
 
 	def followers
-		@users = @user.followers.paginate(user_paginate_opt)
+		@users = @user.followers
 		render 'follow_list'
 	end
 

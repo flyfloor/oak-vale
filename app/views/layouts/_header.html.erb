@@ -1,0 +1,24 @@
+<header>
+	<nav>
+		<div id="site_icon">
+			<%=link_to "Oak vale", root_path %>
+		</div>
+		<div class="nav">
+			<ul>
+				<li><%=link_to "首页", root_path%></a></li>
+        <li><%=link_to "热门", hot_path%></li>
+        <li><%=link_to "集合", tags_path%></li>
+			</ul>
+		</div>
+		<div class="auth">
+			<ul>
+	      <% if signed_in?%>
+					<li><%=link_to current_user.name, current_user%></li>
+					<li><%=link_to "退出", signout_path, method: "delete"%></li>
+				<% else %>
+					<li><%=link_to "登录", signin_path%></li>
+				<% end %>
+			</ul>
+		</div>
+	</nav>
+</header>

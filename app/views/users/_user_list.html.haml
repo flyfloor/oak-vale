@@ -1,0 +1,6 @@
+%ul
+	-model.each do |user|
+		%li
+			%figure
+				=link_to user, title: user.name do
+					=gravatar_image_tag(user.email, alt: user.name)

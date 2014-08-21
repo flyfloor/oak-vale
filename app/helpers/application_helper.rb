@@ -18,8 +18,4 @@ module ApplicationHelper
 		{page: params[:page], per_page: 5}
 	end
 
-	def user_paginate_opt
-		{page: params[:page], per_page: 30}
-	end
-
 end

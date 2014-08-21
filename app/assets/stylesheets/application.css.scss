@@ -10,7 +10,13 @@
  *
  *= require_self
  *= require_tree .
+ *= require nprogress
+ *= require nprogress-bootstrap
  */
+
+ @import "bootstrap-sprockets";
+ @import "bootstrap";
+ @import "font-awesome";
 
 .wrapper {
 	width: 960px;

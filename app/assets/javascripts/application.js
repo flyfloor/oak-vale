@@ -12,14 +12,15 @@
 //
 //= require jquery
 //= require jquery.timeago
+//= require jquery.timeago.settings
 //= require jquery_ujs
 //= require bootstrap
-//= require turbolinks
 //= require_tree .
+//= require turbolinks
+//= require nprogress
+//= require nprogress-turbolinks
 
 $(document).ready(function(){
-	// timeago
-	$("abbr.timeago").timeago();
 
 		//Tag part
 	var Tag = function(){

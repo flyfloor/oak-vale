@@ -1,7 +1,8 @@
 -provide(:title, 'Send email')
-=form_tag password_resets_path, :method => :post do
-	.field
-		=label_tag :email
-		=text_field_tag :email, params[:email]
-	.actions
-		=submit_tag "Reset Password"
+.sign_module
+	=form_tag password_resets_path, :method => :post do
+		.field
+			=label_tag :email
+			=text_field_tag :email, params[:email]
+		.actions
+			=submit_tag "发送", class: "submit-btn"

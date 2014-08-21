@@ -1,20 +1,23 @@
--provide(:title, 'Profile')
+-provide(:title, @user.name)
 .user-page
-	=render partial: 'users/user_cell', locals: {model: @user}
-	=render 'shared/stats'
-	%section.relation
+	.user.module
+		=render partial: 'users/user_cell', locals: {model: @user}
+		=render 'shared/stats'
 		=render 'follow_form' if signed_in?
-	%section.user-posts
-		%section.create-post
+		%section.action.field
+			=link_to "编辑", edit_user_path(@user) if current_user? @user
 		-if current_user? @user
-			=link_to '创建图说', new_post_path, class: 'btn btn-primary'
-		%h3 我的图说
+			%section.create-post
+				=link_to '创建图说', new_post_path, class: 'btn submit-btn'
+	%section.user-posts
 		-if @recent_posts.present?
 			%ul
 				%li
 					-@recent_posts.each do |item|
 						=render partial: "posts/post_cell", locals: {model: item}
-			=link_to '更多', user_posts_path(@user)
+			=link_to '更多', user_posts_path(@user), class: 'link_to_more'
+		-else
+			%article
 		%h3 我喜欢的
 		-if @last_likes.present?
 			=render partial: 'users/likes_feed', locals: {model: @last_likes}

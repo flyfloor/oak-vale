@@ -1,15 +1,15 @@
 -provide(:title, "Edit profile")
-%article
-	%h1 Edit account
+%section#edit_user.module
+	%h3 编辑资料
 	.row
 	=form_for @user do |f|
 		=render partial: "shared/error_messages", locals: {model: @user}
-		.user-name
+		.field
 			=f.text_field :name, placeHolder: "user name"
-		.user-email
+		.field
 			=f.email_field :email, placeHolder: "email", disabled: true
 			=f.label "email can't change", for: "email"
-		.footer
-			=f.submit "create account", class: "btn btn-large btn-primary"
+		.field
+			=f.submit "保存", class: "btn submit-btn"
 	=gravatar_image_tag(@user.email, alt:"#{@user.email}")
-	=link_to "go to gravatar change avatar", "http://gravatar.com/emails", target: "_blank"
+	=link_to "去gravatar改头像", "http://gravatar.com/emails", target: "_blank"

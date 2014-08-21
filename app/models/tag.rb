@@ -10,7 +10,7 @@ class Tag < ActiveRecord::Base
   end
 
   def self.subscribed_by user
-    post_ids = "SELECT post_id FROM user_with_posts
+    post_ids = "SELECT tag_id FROM user_with_posts
                      WHERE user_id = :user_id"
     where("id IN (#{post_ids})", user_id: user.id).timeline
   end

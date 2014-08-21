@@ -1,10 +1,15 @@
-%article{id:"#{model.id}"}
-	=link_to model.title, post_path(model)
-	=timeago(model.created_at)
-	=image_tag(model.photo)
-	=model.content
+%article
+	.title.field
+		=link_to model.title, post_path(model)
+		%time 
+			发布于
+			=timeago(model.created_at)
+	%figure.field
+		.figure-content
+			.field=image_tag(model.photo)
+			%quote.field=model.content
 	=render partial: 'posts/like_post', locals: {model: model}
 	-if model.tags.present?
 		=render partial: 'tags/tags', locals: {model: model.tags}
 	-if(current_user && current_user?(model.user))
-		=link_to 'delete', model, method: :delete, remote: true, class: 'delete-post'
+		=link_to '删除', model, method: :delete, remote: true, class: 'delete-post'

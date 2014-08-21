@@ -1,6 +1,7 @@
 -provide(:title, 'Sign up')
-%article
-	%h1 Sign up
+.sign_module
+	.field
+		%h2 注册
 	=render 'form'
-	%p already have account?
-	=link_to "Sign in", signin_path
+	%span 已有账号?
+	=link_to "登录", signin_path

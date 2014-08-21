@@ -1,7 +1,7 @@
 -provide(:title, 'Hot')
-%h3热门图挂
-%ul
-	-@posts.each do |post|
-		%li
-			=render partial: "users/user_cell", locals: {model: post.user}
-			=render partial: "posts/post_cell", locals: {model: post}
+.hot-page
+	%h3热门图挂
+	%ul
+		-@posts.each do |post|
+			%li
+				=render partial: "posts/post_cell", locals: {model: post}

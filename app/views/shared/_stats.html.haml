@@ -1,8 +1,10 @@
 -@user ||= current_user
-.stats
-	%a{href: "#{following_user_path(@user)}"} 
+.stats.field
+	%a{href: "#{following_user_path(@user)}", class: 'action'} 
 		%span 关注
+		%br
 		%strong.stat#following #{@user.followed_users.count}
-	%a{href: "#{followers_user_path(@user)}"}
+	%a{href: "#{followers_user_path(@user)}", class: 'action'}
 		%span 被关注
+		%br
 		%strong.stat#followers #{@user.followers.count}

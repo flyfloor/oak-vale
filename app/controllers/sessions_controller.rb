@@ -9,11 +9,7 @@ class SessionsController < ApplicationController
 	def create
 		@user = User.find_by(email: session_params[:email].downcase)
 		if @user && @user.authenticate(session_params[:password])
-			if params[:remember_me]
-				sign_in_permanent @user
-			else
-				sign_in @user
-			end
+			params[:remember_me]? sign_in_permanent(@user) : sign_in(@user)
 
 			flash[:success] = 'Welcome back, ' + @user.name
 			redirect_to @user

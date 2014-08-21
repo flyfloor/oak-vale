@@ -1,8 +1,20 @@
 -provide(:title, 'Home')
--if current_user
-	%ul
-		-@feed.each do |post|
-			%li
-				=render partial: "users/user_cell", locals: {model: post.user}
-				=render partial: "posts/post_cell", locals: {model: post}
-		=will_paginate @feed
+.index-page
+	-if current_user
+		%ul
+			-@feed.each do |post|
+				%li.feed
+					=render partial: "users/user_cell", locals: {model: post.user}
+					=render partial: "posts/post_cell", locals: {model: post}
+			=will_paginate @feed
+		%aside.module
+			%h3 快速入口
+			%h5 
+				我的关注( 
+				=link_to current_user.followed_users.count, following_user_path(current_user)
+				)
+			%ul.follow-list-small.field
+				=render partial: 'users/user_list', locals: {model: current_user.followed_users} 
+			%h5 我的订阅
+			%ul.subscribe-list-small.field
+				=render partial: 'users/subscribe_list', locals: {model: current_user.tags} 

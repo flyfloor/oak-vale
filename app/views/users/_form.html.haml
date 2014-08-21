@@ -1,14 +1,12 @@
-.row
-	.col-md-6.col-md-offset-3
-		=form_for @user do |f|
-			=render partial:"shared/error_messages", locals: {model: @user}
-			.user-name
-				=f.text_field :name, placeHolder: 'user name'
-			.user-email
-				=f.email_field :email, placeHolder: 'email'
-			.user-password
-				=f.password_field :password, placeHolder: 'password'
-			.user-password
-				=f.password_field :password_confirmation, placeHolder: 'password again'
-			.footer
-				=f.submit "创建", class: "btn btn-primary"
+=form_for @user do |f|
+	=render partial:"shared/error_messages", locals: {model: @user}
+	.field
+		=f.text_field :name, placeHolder: 'user name'
+	.field
+		=f.email_field :email, placeHolder: 'email'
+	.field
+		=f.password_field :password, placeHolder: 'password'
+	.field
+		=f.password_field :password_confirmation, placeHolder: 'password again'
+	.field
+		=f.submit "创建", class: "submit-btn"
