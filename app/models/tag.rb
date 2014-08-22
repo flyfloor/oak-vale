@@ -1,8 +1,12 @@
 class Tag < ActiveRecord::Base
   has_and_belongs_to_many :posts
-  # has_many :subscriptions, foreign_key: "tag_id", dependent: :destroy
-  # has_many :users, through: :subscriptions
 
+  #tag with subscribers
+  has_many :subscriptions, foreign_key: "tag_id", dependent: :destroy
+  has_many :users, through: :subscriptions
+
+  #tag avatar uploader
+  mount_uploader :avatar, AvatarUploader
   scope :timeline, -> {order(created_at: :desc)}
 
 

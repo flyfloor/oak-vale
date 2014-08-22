@@ -16,11 +16,22 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require_tree .
-//= require turbolinks
 //= require nprogress
 //= require nprogress-turbolinks
 
 $(document).ready(function(){
+
+	$("#user-posts-nav li").click(function(){
+		var index = $("#user-posts-nav li").index($(this));
+		console.log(index);
+
+		$(this).addClass("active")
+					 .siblings("li").removeClass("active");
+
+		var $selectSection = $(".user-posts div").children("section").eq(index);
+		$selectSection.css("display", "block")
+								.siblings().css("display", "none");
+	})
 
 		//Tag part
 	var Tag = function(){

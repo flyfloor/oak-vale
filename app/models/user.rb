@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
 	has_secure_password
 	has_many :posts
+
+  #follow relationships
   has_many :reverse_relationships, foreign_key: "followed_id",
                                    class_name:  "Relationship",
                                    dependent:   :destroy
@@ -8,15 +10,17 @@ class User < ActiveRecord::Base
   has_many :followed_users, through: :relationships, source: :followed
   has_many :followers, through: :reverse_relationships, source: :follower
 
+  #user like post
   has_many :like_posts, foreign_key: "user_id", dependent: :destroy, class_name: "UserWithPost"
 
+  # user subscribe tag
   has_many :subscriptions, foreign_key: "user_id", dependent: :destroy
   has_many :tags, through: :subscriptions
 
+  #validations
 	validates :name, presence: true, uniqueness: true, length: {in: 5..30}
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, uniqueness: true, format: {with: VALID_EMAIL_REGEX }
-
   validates :password, presence: true, length: {in: 6..20}, on: :create
   validates :password_confirmation, presence: true, on: :create
 

@@ -1,13 +1,16 @@
 %tag
 	.content
-		=link_to model.name, tag_path(model)
+		=link_to tag_path(model), class:"action" do
+			%figure
+				=image_tag(model.avatar)
+			=model.name
 	-if signed_in?
 		-if  current_user.subscribe?(model)
-			=link_to "/tags/#{model.id}/subscribe", id: model.id, class: 'subscribe_btn', method: :post, remote: true, class: "subscribed" do
+			=link_to "/tags/#{model.id}/subscribe", id: model.id, class: 'subscribe-btn', method: :post, remote: true, class: "subscribed" do
 				=render 'tags/unsubscribe'
 		-else 
-			=link_to "/tags/#{model.id}/subscribe", id: model.id, class: 'subscribe_btn', method: :post, remote: true do
+			=link_to "/tags/#{model.id}/subscribe", id: model.id, class: 'subscribe-btn', method: :post, remote: true do
 				=render 'tags/subscribe'
 	-else
-		=link_to signin_path, class: "subscribe_btn" do
+		=link_to signin_path, class: " btn submit-btn subscribe-btn" do
 			=render 'tags/subscribe'

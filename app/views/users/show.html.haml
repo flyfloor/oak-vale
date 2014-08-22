@@ -10,15 +10,20 @@
 			%section.create-post
 				=link_to '创建图说', new_post_path, class: 'btn submit-btn'
 	%section.user-posts
-		-if @recent_posts.present?
+		%div
+			%section.his-posts
+				-if @recent_posts.present?
+					=render partial: 'posts/post_list', locals: {model: @recent_posts}
+				-else
+					%article
+			%section.favorites
+				-if @last_likes.present?
+					=render partial: 'posts/post_list', locals: {model: @last_likes}
+				-else
+					%article
+		%nav#user-posts-nav
 			%ul
+				%li.active 
+					%h5他创建的
 				%li
-					-@recent_posts.each do |item|
-						=render partial: "posts/post_cell", locals: {model: item}
-			=link_to '更多', user_posts_path(@user), class: 'link_to_more'
-		-else
-			%article
-		%h3 我喜欢的
-		-if @last_likes.present?
-			=render partial: 'users/likes_feed', locals: {model: @last_likes}
-			=link_to '更多', "#{user_path}/favorites"
+					%h5他喜欢的

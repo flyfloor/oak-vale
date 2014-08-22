@@ -170,10 +170,21 @@ quote:after{
   border-color: transparent transparent #fff transparent;
 }
 
+.debug_dump {
+  clear: both;
+}
+
 
 /*all pages basic*/
 .greenlight{
   color: #51FF9D;
+}
+
+tag {
+  background: #BBD3F7;
+  padding: 3px 8px;
+  border-radius: 40%;
+  font-size: 13px;
 }
 
 a.action {
@@ -526,6 +537,51 @@ li.comment-item+li.comment-item {
   }
 }
 
+/*post page*/
+.post-page {
+  position: relative;
+  .post{
+    position: relative;
+    .user-info{
+      position: absolute;
+      text-align: center;
+      overflow: hidden;
+      right: 220px;
+      bottom: 20px;
+      font-size: 12px;
+      figure{
+        width: 30px;
+        height: 30px;
+        float: left;
+        img{
+          width: 100%;
+          height: 100%;
+          border-radius: 50%;
+        }
+      }
+      figure+h5{
+        display: none;
+      }
+    }    
+  }
+  .post-nav{
+    a{
+      position: absolute;
+      top: 200px;
+      i{
+        font-size: 30px;
+        color: #999;
+      }
+    }
+    .pre-post{
+      left: 50px;
+    }
+    .next-post{
+      right: 50px;
+    }
+  }
+}
+
 
 /*hot page*/
 .hot-page{
@@ -557,6 +613,50 @@ li.comment-item+li.comment-item {
   }
 }
 
+/*tag page*/
+.tag-page {
+  .tag-module {
+    width: 600px;
+    margin: 0 auto;
+    padding: 10px;
+    border-bottom: 1px solid #BEBEC0;
+    margin-bottom: 20px;
+    background: #f8f8f8;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    figure{
+      float: left;
+      margin: 10px 20px 10px 10px;
+    }
+    .edit-tag {
+      float: right;
+      margin-top: -40px;
+      margin-right: 12px;
+    }
+  }
+}
+
+/*tag list*/
+.tag-list{
+  tag{
+    width: 200px;
+    height: 100px;
+    background-color: #ddd;
+    padding: 20px 10px;
+    display: inline-block;
+    margin: 10px;
+    border-radius: 3px;
+    figure{
+      float: left;
+      margin: 0 10px;
+      width: 50px;
+      height: 50px;
+      overflow: hidden;
+    }
+  }
+  tag:hover{
+    box-shadow: 0 0 1px rgba(0,0,0,0.5), 0 0 100px rgba(100,100,100,0.1) inset;
+  }
+}
 
 #edit_user {
   width: 500px;

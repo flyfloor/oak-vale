@@ -1,4 +1,12 @@
-%h3=@tag.name
--if @feed.present?
-	-@feed.each do |post|
-		=render partial: 'posts/post_cell', locals: {model: post}
+.tag-page
+	%section.tag-module
+		%figure
+			=image_tag(@tag.avatar)
+		%h3=@tag.name
+		%span
+			=@tag.subscriber_count 
+			人关注
+		=link_to '编辑', edit_tag_path(@tag), class:'edit-tag'
+	-if @posts.present?
+		-@posts.each do |post|
+			=render partial: 'posts/post_cell', locals: {model: post}

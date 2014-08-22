@@ -1,3 +1,31 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.user-page{
+	position: relative;
+
+	.user-posts{
+		nav{
+			position: absolute;
+			right: 60px;
+			top: 0;
+			ul li {
+				padding: 0 11px 0 10px;
+				display: block;
+				cursor: pointer;
+			}
+			.active {
+				color: #222;
+				box-shadow: 0 0 1px rgba(0, 0, 0, 0.1),2px 0 3px rgba(0, 0, 0, 0.05) inset;
+				background: #fff;
+				border-right: 2px solid #f55;
+			}
+		}
+	}
+	
+	.favorites{
+		display: none;
+	}
+
+}

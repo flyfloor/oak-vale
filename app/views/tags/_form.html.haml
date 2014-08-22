@@ -1,0 +1,11 @@
+=form_for @tag, html: {multipart: true} do |f|
+	=render partial: "shared/error_messages", locals: {model: @tag}
+	.tag-avatar
+		=label_tag "avatar", "上传图片"
+		=image_tag(@tag.avatar)
+		=f.file_field :avatar
+		=f.hidden_field :avatar_cache
+	.tag-name
+		=f.text_field :name, placeHolder: "tag name"
+	.actions
+		=f.submit "发布", class: "btn submit-btn"

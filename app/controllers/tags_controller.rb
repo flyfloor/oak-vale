@@ -1,14 +1,42 @@
 class TagsController < ApplicationController
 
-	before_filter :sign_in_user, only: [:like]
-	before_filter :find_tag, only: [:show]
+	before_filter :sign_in_user, only: [:like, :edit, :update, :create, :destroy]
+	before_filter :find_tag, only: [:show, :edit, :destroy, :update]
 
 	def index
 		@tags = Tag.all.limit(20)
 	end
 
 	def show
-		@feed = @tag.posts.paginate(page: params[:page], per_page: 10)
+		@posts = @tag.posts
+	end
+
+	def new
+		@tag = Tag.new
+	end
+
+	def create
+		@tag = Tag.new(tag_params)
+
+		if @tag.save
+			flash[:success] = "Tag created"
+			redirect_to @tag
+		else
+			render 'new'
+		end
+	end
+
+	def edit
+		
+	end
+
+	def update
+		if @tag.update_attributes(tag_params)
+			flash[:success] = "Tag updated"
+      redirect_to @tag
+		else
+		  render 'edit'
+		end
 	end
 
 	def subscribe
@@ -30,6 +58,10 @@ class TagsController < ApplicationController
 	end
 
 	private
+		def tag_params
+			params.require(:tag).permit(:name, :avatar)
+		end
+
 		def find_tag
 			@tag = Tag.find(params[:id])
 		end

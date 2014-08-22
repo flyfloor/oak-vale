@@ -13,7 +13,7 @@ class PostsController < ApplicationController
 
 	def create		
 		@post = current_user.posts.build(post_params)
-		label_tag(@post, tag_params.split('#tag#'))
+		label_tag(@post, tag_params)
 
 		if @post.save
 			flash[:success] = "Post created"
@@ -24,6 +24,8 @@ class PostsController < ApplicationController
 	end
 
 	def update
+		@post.tags = []
+		label_tag(@post, tag_params)
 		if @post.update_attributes(post_params)
 			flash[:success] = "Post updated"
       redirect_to @post
@@ -82,7 +84,7 @@ class PostsController < ApplicationController
 		end
 
 		def tag_params
-			params["tags"]
+			params["tags"].split('#tag#')
 		end
 
 		def find_post

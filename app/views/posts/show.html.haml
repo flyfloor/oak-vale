@@ -1,7 +1,13 @@
 -provide(:title, @post.title)
 .post-page
-	%section.post-info
-		=render partial: "posts/post_cell", locals: {model: @post}
-	%section.user-info
-		%h3 作者信息
-		=render partial: "users/user_cell", locals: {model: @user}
+	.post-wrapper
+		%section.post
+			=render partial: "posts/post_cell", locals: {model: @post}
+			=render partial: "users/user_cell", locals: {model: @user}
+	%nav.post-nav
+		-if @post.has_pre?
+			=link_to post_path(@post.pre_post), class: "pre-post" do 
+				%i.fa.fa-chevron-left
+		-if @post.has_next?
+			=link_to post_path(@post.next_post), class: "next-post" do
+				%i.fa.fa-chevron-right
