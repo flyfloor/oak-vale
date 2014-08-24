@@ -11,16 +11,26 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.turbolinks
 //= require jquery.timeago
 //= require jquery.timeago.settings
 //= require jquery_ujs
+//= require turbolinks 
 //= require bootstrap
 //= require_tree .
 //= require nprogress
 //= require nprogress-turbolinks
 
 $(document).ready(function(){
+	//timeago 
+	$("abbr.timeago").timeago();
 
+	// reply a comment
+	$(".reply").click(function(){
+		$("#comment_content").focus().val("@" + $(this).data("name") + " ");
+	})
+
+	// user nav click
 	$("#user-posts-nav li").click(function(){
 		var index = $("#user-posts-nav li").index($(this));
 		console.log(index);

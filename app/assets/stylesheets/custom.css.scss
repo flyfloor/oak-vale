@@ -9,6 +9,11 @@ body {
 section {
   overflow: auto;
 }
+
+article, section, comment {
+  display: block;
+}
+
 textarea {
   resize: vertical;
 }
@@ -117,9 +122,8 @@ input[type="text"] {
   width: 350px;
   height: 30px;
   outline: none;
-  border: 1px solid #ccc;
+  border: 1px solid #ddd;
   border-radius: 2px;
-  box-shadow: 1px 1px 1px rgba(0,0,0,0.09) inset;
 }
 
 input[type="email"]:focus, 
@@ -134,9 +138,11 @@ textarea:focus {
 }
 
 textarea {
+  width: 100%;
+  height: 100px;
   padding: 5px 10px;
   outline: none;
-  border: 1px solid #ccc;
+  border: 1px solid #ddd;
   border-radius: 2px;
 }
 
@@ -180,11 +186,20 @@ quote:after{
   color: #51FF9D;
 }
 
+.form {
+  width: 700px;
+  padding: 20px;
+  background: #fff;
+  margin: 0 auto;
+}
+
 tag {
   background: #BBD3F7;
   padding: 3px 8px;
   border-radius: 40%;
   font-size: 13px;
+  margin-right: 5px;
+  cursor: pointer;
 }
 
 a.action {
@@ -326,7 +341,7 @@ header nav {
   width: 130px;
   display: inline-block;
   float: left;
-  margin-left: 50px;
+  margin-left: 200px;
   margin-top: 8px;
 }
 
@@ -348,13 +363,26 @@ header ul li {
 
 header .nav, header .auth {
   display: inline-block;
-  padding-left: 100px;
+  padding-left: 50px;
 }
 
 header .auth {
   float: right;
-  padding: 0 50px 0 0;
+  margin-right: 150px;
   font-size: 14px;
+  ul{
+    margin-top: 0;
+    li{
+      a.current{
+        font-weight: bold;
+        color: #222;
+        background: #fff;
+        padding: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3) inset;
+        display: inline-block;
+      }
+    }
+  }
 }
 
 .module {
@@ -373,26 +401,32 @@ article {
   padding: 20px;
   margin-bottom: 10px;
   position: relative;
+  .post-action {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+  .content ul li{
+    display: list-item;
+    margin-left: 20px;
+  }
+  .post-like{
+    font-size: 20px;
+    margin-right: 20px;
+    a{
+      font-size: 20px;
+    }
+  }
+  .post-tags{
+    a{
+      padding: 2px 10px;
+      background: #ddd;
+      margin: 0 5px;
+    }
+  }
+  
 }
 
-article .delete-post {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-}
-
-article .content ul li{
-  display: list-item;
-  margin-left: 20px;
-}
-
-article .content ul li {
-  list-style-type: disc;
-}
-
-article .content ol li {
-  list-style-type: decimal;
-}
 
 .link_to_more::after {
   font-family:fontAwesome;
@@ -436,38 +470,6 @@ article textarea {
   min-height: 80px;
   margin: 5px 0;
   resize: vertical;
-}
-
-li.comment-item+li.comment-item {
-  border-top: 1px dashed #eee;
-}
-
-.comment-item {
-  font-size: 14px;
-  margin: 20px 0 0;
-  padding: 30px 0 0;
-  width: 100%;
-  position: relative;
-}
-
-.comment-item .bd, .comment-item .ft {
-  margin-left: 60px; 
-  margin-right: 60px; 
-}
-
-.comment-item .bd li {
-  list-style-type:disc; 
-}
-
-.comment-item .vote-action {
-  position: absolute;
-  right: 10px;
-  top: 10px;
-}
-
-.vote-action button:hover {
-  background-color: #EEEEEE;
-  color: #360F0F;
 }
 
 /*index page*/
@@ -533,6 +535,46 @@ li.comment-item+li.comment-item {
     margin-left: 220px;
     article{
       min-height: 400px;
+    }
+  }
+}
+
+.follow-page{
+  .user{
+    margin: 20px 0;
+    figure{
+      float: left;
+      margin: 0 10px 10px;
+      img{
+        border-radius: 10%;
+        width: 50px;
+        height: 50px;
+      }
+    }
+  }
+  .follow-list{
+    .user-info{
+      margin: 30px 0 0 10px;
+      text-align: center;
+      width: 120px;
+      height: 120px;
+      overflow: hidden;
+      figure{
+        img{
+          border-radius: 50%;
+        }      
+      }
+    }
+    nav {
+      text-align: center;
+      border-bottom: 1px solid #ccc;
+      a{
+        padding: 5px 10px;
+        font-size: 16px;
+        color: #444;
+        margin-left: 10px;
+        display: inline-block;
+      }
     }
   }
 }
@@ -609,6 +651,20 @@ li.comment-item+li.comment-item {
           border: none;
         }
       }
+      .post-like{
+        font-size: 14px;
+        margin-right: 0;
+        a{
+          font-size: 14px;
+        }
+      }
+      .post-tags{
+        a{
+          padding: 0;
+          background: none;
+          margin: 0;
+        }
+      }
     }
   }
 }
@@ -637,14 +693,20 @@ li.comment-item+li.comment-item {
 
 /*tag list*/
 .tag-list{
-  tag{
+  #new_tag {
+    margin: 10px 10px 20px;
+  }
+  li{
     width: 200px;
     height: 100px;
     background-color: #ddd;
     padding: 20px 10px;
-    display: inline-block;
     margin: 10px;
+    display: inline-block;
     border-radius: 3px;
+    .content{
+      margin-bottom: 10px;
+    }
     figure{
       float: left;
       margin: 0 10px;
@@ -653,6 +715,7 @@ li.comment-item+li.comment-item {
       overflow: hidden;
     }
   }
+
   tag:hover{
     box-shadow: 0 0 1px rgba(0,0,0,0.5), 0 0 100px rgba(100,100,100,0.1) inset;
   }
@@ -666,40 +729,7 @@ li.comment-item+li.comment-item {
   }
 }
 
-section.like li{
-  text-align: center;
+comment{
+  width: 600px;
+  margin: 0 auto;
 }
-
-section.like .thumb_img {
-  width: 220px;
-  height: 180px;
-  overflow: hidden;
-  position: relative;
-  margin: 10px;
-  text-align: center;
-}
-
-
-section.like img{
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  margin: auto;
-}
-
-section.create ul {
-  padding: 10px 20px;
-}
-
-section.create li{
-  width: 100%;
-  line-height: 30px;
-  font-size: 15px;
-}
-
-section.create time {
-  margin-left: 10px;
-}
-

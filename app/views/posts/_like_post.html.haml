@@ -10,8 +10,7 @@
 		%span.like_count
 			=model.like_count
 -else
-	.like_post
-		=link_to signin_path do
-			=render 'posts/like'
-		%span.like_count
-			=model.like_count
+	=link_to signin_path do
+		=render 'posts/like'
+	%span.like_count
+		=model.like_count

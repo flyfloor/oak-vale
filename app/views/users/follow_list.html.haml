@@ -1,5 +1,12 @@
 -provide(:title, 'Relationship with others')
-%ul
-	-@users.each do |user|
-		%li
-			=render partial: "users/user_cell", locals: {model: user}
+.follow-page
+	.user
+		=render partial:'users/user_cell', locals: {model: @user}
+	.follow-list
+		%nav
+			=link_to '关注', following_user_path(@user), class: 'action'
+			=link_to '被关注', followers_user_path(@user), class: 'action'
+		%ul
+			-@users.each do |user|
+				%li
+					=render partial: "users/user_cell", locals: {model: user}

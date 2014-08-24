@@ -1,4 +1,5 @@
 OakVale::Application.routes.draw do
+  get "notifications/index"
   get "password_resets/new"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -22,6 +23,13 @@ OakVale::Application.routes.draw do
     get 'posts' => 'posts#index'
     member do
       get 'followers', 'following'
+    end
+  end
+
+  #notifications
+  resources :notifications, only: [:index, :destroy] do
+    collection do
+      post :clear
     end
   end
 

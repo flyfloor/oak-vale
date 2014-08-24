@@ -1,24 +1,30 @@
 class CommentsController < ApplicationController
 	before_filter :sign_in_user, only: [ :create, :destroy]
+	before_filter :find_post, only: [ :create, :destroy]
 
 	def create
-		@comment = Comment.new
-		if signed_in?
-			author_comment @comment
-			@comment[:content] = params[:comment][:content]
-		else
-			@comment = Comment.new(params[:comment])
-		end
+		@comment = @post.comments.build(comment_params)
+		@comment.user = current_user
+		flash[:error] = '评论失败' unless @comment.save
 
-		thing.comments << @comment
-		redirect_to thing
+		redirect_to @post
+
 	end
 
 	def destroy
-		@comment = thing.comments.find params[:id]
+		@comment = @post.comments.find params[:id]
 		if @comment.destroy
-			render json:{success: true}
+			redirect_to @post
 		end
 	end
+
+	private
+		def comment_params
+			params.require(:comment).permit(:content)
+		end
+
+		def find_post
+			@post = Post.find params[:post_id]
+		end
 	
 end

@@ -35,19 +35,27 @@ class Post < ActiveRecord::Base
   end
 
   def has_pre?
-    Post.first != self
+    user_posts.first != self
   end
 
   def pre_post
-    Post.where("id < ?", self).order("id DESC").first
+    post_id = self.id
+    user_posts.where(" id < ?", post_id).last
   end
 
   def has_next?
-    Post.last != self
+    user_posts.last != self
   end
 
   def next_post
-    Post.where("id > ?", self).order("id ASC").first
+    post_id = self.id
+    user_posts.where(" id > ?", post_id).first
   end
-  
+
+  private
+
+    def user_posts
+      self.user.posts
+    end
+    
 end

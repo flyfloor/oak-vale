@@ -11,3 +11,12 @@
 		-if @post.has_next?
 			=link_to post_path(@post.next_post), class: "next-post" do
 				%i.fa.fa-chevron-right
+	%comment
+		#comment-form
+			=render partial: "comments/form", locals: {model: @post}
+		.comments
+			-if @comments.present?
+				%ul
+					-@comments.each do |comment|
+						%li{id: "comment-#{comment.id}"}
+							=render partial: "comments/comment_cell", locals: {model: comment}

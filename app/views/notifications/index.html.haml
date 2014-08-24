@@ -1,0 +1,13 @@
+.notification-page
+	%h3 通知
+	=link_to '清空', clear_notifications_path, method: :post, class: 'btn submit-btn clear'
+	-if @notifications.present?
+		%ul
+			-@notifications.each do |notification|
+				%li
+					=link_to "#{post_path(notification.comment.post)}" do
+						="#{notification.comment.post.title}"
+					%span=notification.content
+					%span 
+						评论者:
+						=link_to "#{notification.comment.user.name}", "#{user_path(notification.comment.user)}"

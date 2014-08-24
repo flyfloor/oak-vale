@@ -13,7 +13,8 @@
 		<div class="auth">
 			<ul>
 	      <% if signed_in?%>
-					<li><%=link_to current_user.name, current_user%></li>
+					<li><%=link_to "通知", notifications_path %></li>
+					<li><%=link_to current_user.name, current_user, class: 'current' %></li>
 					<li><%=link_to "退出", signout_path, method: "delete"%></li>
 				<% else %>
 					<li><%=link_to "登录", signin_path%></li>

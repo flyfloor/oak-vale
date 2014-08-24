@@ -1,0 +1,8 @@
+.field
+	=link_to model.user.name, user_path(model)
+	%time=timeago(model.created_at)
+=model.content
+=link_to '回复', 'javascript:;', data: {name: model.user.name}, class: 'reply'
+.action
+	-if current_user? model.user
+		=link_to 'x', [model.post, model], method: :delete

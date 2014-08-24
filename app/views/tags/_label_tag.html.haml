@@ -1,14 +1,14 @@
 %h4.italic 贴标签分个类吧！
 .tag-picker
-	.selected-tags
+	.selected-tags.field
 		.tag-input
-			%input#new-tag{type:'text', placeholder: 'Add a label'}
+			%input#new-tag.field{type:'text', placeholder: 'Add a label'}
 		%input#hid_tag{type: 'hidden', name: "tags"}
 		%input#hid_swap{type: 'hidden'}
 		-if model.tags.present?
 			-model.tags.each do |tag|
 				%tag.tag=tag.name
-	.exist-tags
-		%p.italic All existed tags	
+	.exist-tags.field
+		%p.italic 已有分类：	
 		-Tag.all.each do |tag|
 			%tag.ext-tag=tag.name

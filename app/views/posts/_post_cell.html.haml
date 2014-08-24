@@ -8,8 +8,12 @@
 		=image_tag(model.photo)
 	.figure-content
 		%quote.field=model.content
-	=render partial: 'posts/like_post', locals: {model: model}
-	-if model.tags.present?
-		=render partial: 'tags/tags', locals: {model: model.tags}
+	%span.post-like
+		=render partial: 'posts/like_post', locals: {model: model}
+	%span.post-tags
+		-if model.tags.present?
+			=render partial: 'tags/tags', locals: {model: model.tags}
 	-if(current_user && current_user?(model.user))
-		=link_to '删除', model, method: :delete, remote: true, class: 'delete-post'
+		.post-action
+			=link_to '编辑', edit_post_path(model), class: 'edit-post'
+			=link_to '删除', model, method: :delete, remote: true, class: 'delete-post'

@@ -1,13 +1,13 @@
 =form_for @post, html: {multipart: true} do |f|
 	=render partial: "shared/error_messages", locals: {model: @post}
-	.post-photo
+	.field
 		=label_tag "photo", "上传图片"
 		=image_tag(@post.photo)
 		=f.file_field :photo
 		=f.hidden_field :photo_cache
-	.post-title
+	.field
 		=f.text_field :title, placeHolder: "post title"
-	.post-content
+	.field
 		=f.text_area :content, placeHolder: "take a note"
 	.tag-editor.field
 		=render partial: 'tags/label_tag', locals: {model: @post}
