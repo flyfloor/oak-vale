@@ -1,0 +1,7 @@
+%h3小组
+.group-list
+	=link_to '创建小组', new_group_path, class: 'btn submit-btn', id: 'new_group'
+	%ul
+		-@groups.each do |group|
+			%li
+				=render partial: 'groups/group_cell', locals: {model: group}

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140824083405) do
+ActiveRecord::Schema.define(version: 20140829080945) do
 
   create_table "comments", force: true do |t|
     t.text     "content"
@@ -23,12 +23,31 @@ ActiveRecord::Schema.define(version: 20140824083405) do
 
   add_index "comments", ["post_id"], name: "index_comments_on_post_id", using: :btree
 
+  create_table "group_userships", force: true do |t|
+    t.integer  "group_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "groups", force: true do |t|
+    t.string   "name"
+    t.string   "desc"
+    t.string   "avatar"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "members_count", default: 0
+  end
+
+  add_index "groups", ["members_count"], name: "index_groups_on_members_count", using: :btree
+
   create_table "notifications", force: true do |t|
     t.string   "content"
     t.string   "url"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "reply_id"
     t.integer  "comment_id"
   end
 
@@ -84,6 +103,19 @@ ActiveRecord::Schema.define(version: 20140824083405) do
   end
 
   add_index "tags", ["subscriber_count"], name: "index_tags_on_subscriber_count", using: :btree
+
+  create_table "topics", force: true do |t|
+    t.string   "title"
+    t.string   "content"
+    t.integer  "user_id"
+    t.integer  "group_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "like_count", default: 0
+  end
+
+  add_index "topics", ["group_id"], name: "index_topics_on_group_id", using: :btree
+  add_index "topics", ["user_id"], name: "index_topics_on_user_id", using: :btree
 
   create_table "user_with_posts", force: true do |t|
     t.datetime "created_at"

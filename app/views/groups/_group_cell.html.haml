@@ -1,0 +1,20 @@
+.content
+	=link_to group_path(model), class:"action" do
+		%figure
+			=image_tag(model.avatar)
+		=model.name
+	.group-description
+		=model.desc
+	%span.members_count
+		=model.members_count
+		个成员
+-if signed_in?
+	-if  current_user.joined?(model)
+		=link_to "/groups/#{model.id}/join", id: "join-btn-#{model.id}", class: 'join-btn', method: :post, remote: true, class: "joined" do
+			=render partial: 'groups/leave', locals: {model: model}
+	-else 
+		=link_to "/groups/#{model.id}/join", data:{id: model.id}, class: 'join-btn', method: :post, remote: true do
+			=render partial: 'groups/join', locals: {model: model}
+-else
+	=link_to signin_path, class: " btn submit-btn join-btn" do
+		=render partial: 'groups/join', locals: {model: model}

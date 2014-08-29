@@ -1,0 +1,7 @@
+var $action_btn = $("#join-btn-<%= @group.id %>")
+$action_btn.parent().find(".members_count").html('<%= @group.members_count %>')
+if ($action_btn.hasClass("joined")) {
+	$action_btn.removeClass("joined").html("<%= escape_javascript(render('groups/join')) %>")
+}else{
+	$action_btn.addClass("joined").html("<%= escape_javascript(render('groups/leave')) %>")
+}

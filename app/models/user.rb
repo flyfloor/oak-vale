@@ -2,7 +2,8 @@ class User < ActiveRecord::Base
 	has_secure_password
   has_many :posts
   has_many :comments
-	has_many :notifications
+  has_many :notifications
+	has_many :topics
 
   #follow relationships
   has_many :reverse_relationships, foreign_key: "followed_id",
@@ -14,6 +15,10 @@ class User < ActiveRecord::Base
 
   #user like post
   has_many :like_posts, foreign_key: "user_id", dependent: :destroy, class_name: "UserWithPost"
+
+  ##user groups
+  has_many :group_userships, foreign_key: "user_id", dependent: :destroy
+  has_many :groups, through: :group_userships
 
   # user subscribe tag
   has_many :subscriptions, foreign_key: "user_id", dependent: :destroy
@@ -94,5 +99,18 @@ class User < ActiveRecord::Base
   def unsubscribe! tag
     subscriptions.find_by(tag_id: tag.id).destroy
   end
+
+  #join group
+  def joined? group
+    group_userships.find_by(group_id: group.id) if self.present?
+  end
+  
+  def join! group
+    group_userships.create!(group_id: group.id)  
+  end
+
+  def leave! group
+    group_userships.find_by(group_id: group.id).destroy
+  end  
 
 end

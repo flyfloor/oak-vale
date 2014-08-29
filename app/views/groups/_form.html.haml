@@ -1,0 +1,13 @@
+=form_for @group, html: {multipart: true} do |f|
+	=render partial: "shared/error_messages", locals: {model: @group}
+	.group-avatar.field
+		=label_tag "avatar", "上传图片"
+		=image_tag(@group.avatar)
+		=f.file_field :avatar
+		=f.hidden_field :avatar_cache
+	.group-name.field
+		=f.text_field :name, placeHolder: "group name"
+	.group-name.field
+		=f.text_field :desc, placeHolder: "group description"
+	.actions
+		=f.submit "发布", class: "btn submit-btn"

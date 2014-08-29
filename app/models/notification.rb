@@ -1,3 +1,4 @@
+#coding: utf-8
 class Notification < ActiveRecord::Base
 	include Rails.application.routes.url_helpers
 
