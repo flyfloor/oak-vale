@@ -3,7 +3,8 @@ class User < ActiveRecord::Base
   has_many :posts
   has_many :comments
   has_many :notifications
-	has_many :topics
+  has_many :topics
+	has_many :replies
 
   #follow relationships
   has_many :reverse_relationships, foreign_key: "followed_id",

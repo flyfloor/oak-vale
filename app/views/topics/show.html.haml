@@ -1,0 +1,32 @@
+-provide(:title, @topic.title)
+.topic-page
+	%section.topic-module
+		%section.module.topic-main
+			%h3=@topic.title
+			.field
+				%span
+					作者：
+					=link_to @topic.user.name, user_path(@topic.user)
+				%time 
+					发布于
+					=timeago(@topic.created_at)
+			.field.content
+				=simple_format @topic.content
+		%section.topic-replies.module
+			%h4 评论
+			#reply-form
+				=render partial: "replies/form", locals: {model: @topic}
+			.replies
+				-if @replies.present?
+					%ul
+						-@replies.each do |reply|
+							%li.reply{id: "reply-#{reply.id}"}
+								=render partial: "replies/reply_cell", locals: {model: reply}
+					=will_paginate @replies
+	%aside.module
+		%section.group
+			%h4 小组
+			=render partial: "groups/group_cell", locals: {model: @group}
+		%section.user
+			%h4 作者
+			=render partial: "users/user_cell", locals: {model: @user}

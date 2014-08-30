@@ -1,0 +1,14 @@
+%section
+	.title.field
+		=link_to model.title, group_topic_path(model.group, model)
+		%span.author
+			作者：
+			=link_to model.user.name, user_path(model.user)
+		%time 
+			发布于
+			=timeago(model.created_at)
+		%span.comments_count
+		%i.fa.fa-comments-o
+			=model.replies.count
+	.content.field
+		=model.content.to_s.slice(0, 100)

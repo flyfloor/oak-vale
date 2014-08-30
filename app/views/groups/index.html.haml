@@ -1,7 +1,16 @@
-%h3小组
-.group-list
-	=link_to '创建小组', new_group_path, class: 'btn submit-btn', id: 'new_group'
+.hot-topics.module
+	%h3 热门话题
+	-if @hot_topics.present?
+		%ul
+			-@hot_topics.each do |topic|
+				%li.topic-item
+					=render partial: 'topics/topic_cell', locals: {model: topic}
+		=will_paginate @hot_topics
+%aside.group-list.module
+	%h3 推荐小组
 	%ul
 		-@groups.each do |group|
-			%li
+			%li.group-item
 				=render partial: 'groups/group_cell', locals: {model: group}
+	.center
+		=link_to '创建小组', new_group_path, class: 'btn submit-btn', id: 'new_group'

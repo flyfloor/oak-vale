@@ -1,0 +1,10 @@
+-if signed_in?
+	=form_for([model.group, model, model.replies.build]) do |f|
+		=f.text_area :content, name: "reply[content]", placeholder: "leave a reply"
+		.field
+			=f.submit "留言", class: "btn submit-btn"
+-else
+	.center
+		%span
+			=link_to '登录', signin_path
+			后评论

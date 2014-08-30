@@ -1,9 +1,17 @@
 .group-page
-	%section.group-module
-		=render partial: 'groups/group_cell', locals: {model: @group}
-	%section.topic-module
+	%section.topic-module.module
+		%h3 小组话题
 		-if current_user
 			=link_to '创建话题', new_group_topic_path(@group), class: 'btn submit-btn'
 		-if @topics.present?
-			-@topics.each do |topic|
-				=render partial: 'topics/topic_cell', locals: {model: topic}
+			%ul
+				-@topics.each do |topic|
+					%li.topic-item
+						=render partial: 'topics/topic_cell', locals: {model: topic}
+	%aside.module
+		%section.group-module
+			=render partial: 'groups/group_cell', locals: {model: @group}
+		%section.group-members
+			%h4 小组成员
+			-if @members.present?
+				=render partial: 'users/user_list', locals: {model: @members} 

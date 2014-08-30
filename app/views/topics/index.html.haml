@@ -1,0 +1,7 @@
+%h3 小组话题
+.topic-list
+	=link_to '创建话题', new_group_topic_path, class: 'btn submit-btn', id: 'new_topic'
+	%ul
+		-@topics.each do |topic|
+			%li
+				=render partial: 'topics/topic_cell', locals: {model: topic}

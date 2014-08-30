@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140829080945) do
+ActiveRecord::Schema.define(version: 20140830095620) do
 
   create_table "comments", force: true do |t|
     t.text     "content"
@@ -47,7 +47,6 @@ ActiveRecord::Schema.define(version: 20140829080945) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "reply_id"
     t.integer  "comment_id"
   end
 
@@ -83,6 +82,17 @@ ActiveRecord::Schema.define(version: 20140829080945) do
   add_index "relationships", ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true, using: :btree
   add_index "relationships", ["follower_id"], name: "index_relationships_on_follower_id", using: :btree
 
+  create_table "replies", force: true do |t|
+    t.text     "content"
+    t.integer  "user_id"
+    t.integer  "topic_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "replies", ["topic_id"], name: "index_replies_on_topic_id", using: :btree
+  add_index "replies", ["user_id"], name: "index_replies_on_user_id", using: :btree
+
   create_table "subscriptions", force: true do |t|
     t.integer  "user_id"
     t.integer  "tag_id"
@@ -106,7 +116,7 @@ ActiveRecord::Schema.define(version: 20140829080945) do
 
   create_table "topics", force: true do |t|
     t.string   "title"
-    t.string   "content"
+    t.text     "content"
     t.integer  "user_id"
     t.integer  "group_id"
     t.datetime "created_at"

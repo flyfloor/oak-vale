@@ -1,0 +1,7 @@
+=form_for([@group, @topic]) do |f|
+	.field
+		=f.text_field :title, placeHolder: "topic title"
+	.field
+		=f.text_area :content, placeHolder: "take a note"
+	.actions
+		=f.submit "发布", class: "btn submit-btn"

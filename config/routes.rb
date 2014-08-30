@@ -1,7 +1,4 @@
 OakVale::Application.routes.draw do
-  get "topics/index"
-  get "groups/index"
-  get "notifications/index"
   get "password_resets/new"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -30,7 +27,9 @@ OakVale::Application.routes.draw do
 
   #groups
   resources :groups, only: [:index, :show, :new, :edit, :update, :create] do  
-    resources :topics
+    resources :topics do
+      resources :replies, only:[:create, :destroy]
+    end
   end
 
   #notifications
@@ -48,7 +47,7 @@ OakVale::Application.routes.draw do
 
   #posts
   resources :posts do
-    resources :comments
+    resources :comments, only:[:create, :destroy]
   end
 
   post 'tags/:id/subscribe' => 'tags#subscribe'

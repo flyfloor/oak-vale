@@ -20,3 +20,4 @@
 					-@comments.each do |comment|
 						%li{id: "comment-#{comment.id}"}
 							=render partial: "comments/comment_cell", locals: {model: comment}
+				=will_paginate @comments

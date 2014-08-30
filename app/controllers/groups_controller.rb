@@ -4,7 +4,7 @@ class GroupsController < ApplicationController
 
 	def index
 		@groups = Group.all.limit(20)
-		@hot_topics = Topic.hot.paginate(page: params[:page], per_page: 30)
+		@hot_topics = Topic.timeline.paginate(page: params[:page], per_page: 6)
 	end
 
 	def new
