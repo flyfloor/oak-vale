@@ -27,7 +27,7 @@ $(document).ready(function(){
 
 	// reply a comment
 	$(".reply").click(function(){
-		$("#comment_content").focus().val("@" + $(this).data("name") + " ");
+		$("#comment_content").focus().val($("#comment_content").val() + "@" + $(this).data("name") + " ");
 	})
 
 	// user nav click

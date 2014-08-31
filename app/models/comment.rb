@@ -11,7 +11,7 @@ class Comment < ActiveRecord::Base
 
   before_save do
     self.content_html = self.content.clone
-    binding.pry
+
     names = Comment.mentioned_users self
     names.each do |name|
       user = User.find_by(name: name)

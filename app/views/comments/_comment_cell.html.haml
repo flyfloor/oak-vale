@@ -1,7 +1,8 @@
 .field
 	=link_to model.user.name, user_path(model.user)
 	%time=timeago(model.created_at)
-=sanitize model.content_html
+.content
+	=sanitize model.content_html
 =link_to '回复', 'javascript:;', data: {name: model.user.name}, class: 'reply'
 .action
 	-if current_user? model.user
