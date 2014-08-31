@@ -12,6 +12,8 @@
 					=timeago(@topic.created_at)
 			.field.content
 				=simple_format @topic.content
+			.field.likes
+				=render partial: 'topics/like_topic', locals: {model: @topic}
 		%section.topic-replies.module
 			%h4 评论
 			#reply-form

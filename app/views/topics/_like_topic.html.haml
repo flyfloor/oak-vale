@@ -1,0 +1,16 @@
+-if signed_in?
+	-if current_user.voted? model
+		=link_to "/topics/#{model.id}/vote", id: "topic-#{model.id}", method: :post, remote: true, class: 'action vote_btn liked' do
+			=render 'shared/unlike'
+		%span.like_count
+			=model.like_count
+	-else
+		=link_to "/topics/#{model.id}/vote", id: "topic-#{model.id}", class: 'action vote_btn', method: :post, remote: true do
+			=render 'shared/like'
+		%span.like_count
+			=model.like_count
+-else
+	=link_to signin_path do
+		=render 'shared/like'
+	%span.like_count
+		=model.like_count

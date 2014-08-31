@@ -7,8 +7,15 @@
 		%time 
 			发布于
 			=timeago(model.created_at)
-		%span.comments_count
-		%i.fa.fa-comments-o
+		%span.vote_count
+			-if current_user
+				-if current_user.voted? model
+					%i.fa.fa-heart
+				-else
+					%i.fa.fa-heart-o
+			=model.like_count
+		%span.replies_count
+			%i.fa.fa-comments-o
 			=model.replies.count
 	.content.field
 		=model.content.to_s.slice(0, 100)

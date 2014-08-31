@@ -1,5 +1,5 @@
-var $action_btn = $("#<%= @post.id %>")
-$action_btn.siblings(".like_count").html('<%= @post.like_count %>')
+var $action_btn = $("#topic-<%= @topic.id %>")
+$action_btn.siblings(".like_count").html('<%= @topic.like_count %>')
 if ($action_btn.hasClass("liked")) {
 	$action_btn.removeClass("liked").html("<%= escape_javascript(render('shared/like')) %>")
 }else{

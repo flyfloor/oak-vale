@@ -17,13 +17,17 @@ class User < ActiveRecord::Base
   #user like post
   has_many :like_posts, foreign_key: "user_id", dependent: :destroy, class_name: "UserWithPost"
 
-  ##user groups
+  #user groups
   has_many :group_userships, foreign_key: "user_id", dependent: :destroy
   has_many :groups, through: :group_userships
 
-  # user subscribe tag
+  #user subscribe tag
   has_many :subscriptions, foreign_key: "user_id", dependent: :destroy
   has_many :tags, through: :subscriptions
+
+  #vote topics
+  has_many :vote_topics, foreign_key: "user_id", dependent: :destroy
+
 
   #validations
 	validates :name, presence: true, uniqueness: true, length: {in: 5..30}
@@ -112,6 +116,18 @@ class User < ActiveRecord::Base
 
   def leave! group
     group_userships.find_by(group_id: group.id).destroy
-  end  
+  end
 
+  #vote topic  
+  def voted? topic
+    vote_topics.find_by(topic_id: topic.id)    
+  end
+
+  def vote! topic
+    vote_topics.create!(topic_id: topic.id)
+  end
+
+  def unvote! topic
+    vote_topics.find_by(topic_id: topic.id).destroy  
+  end
 end

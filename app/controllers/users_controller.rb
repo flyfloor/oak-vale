@@ -38,6 +38,7 @@ class UsersController < ApplicationController
 	end
 
 	def show
+		@groups = @user.groups
 		@recent_posts = @user.recent_posts(3)
 		@last_likes =  @user.likes_feed(3)
 	end

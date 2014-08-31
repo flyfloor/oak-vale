@@ -36,6 +36,24 @@ class TopicsController < ApplicationController
     end
   end
 
+  def vote
+    @topic = Topic.find(params[:id])
+
+    if current_user.voted? @topic
+      @topic.like_count -= 1 unless @topic.like_count == 0
+      current_user.unvote! @topic
+    else
+      @topic.like_count += 1
+      current_user.vote! @topic
+    end
+    @topic.save
+    
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
 
 
 

@@ -3,10 +3,14 @@
 		%figure
 			=image_tag(@tag.avatar)
 		%h3=@tag.name
+		=link_to '编辑', edit_tag_path(@tag), class:'edit-tag'
+		.field
+			%span
+				=@tag.posts.count
+				篇图说 
 		%span
 			=@tag.subscriber_count 
-			人关注
-		=link_to '编辑', edit_tag_path(@tag), class:'edit-tag'
+			人订阅
 	-if @posts.present?
 		-@posts.each do |post|
 			=render partial: 'posts/post_cell', locals: {model: post}

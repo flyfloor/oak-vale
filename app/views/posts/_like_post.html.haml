@@ -1,16 +1,16 @@
 -if signed_in?
 	-if current_user.like? model
 		=link_to "/posts/#{model.id}/like", id: model.id, method: :post, remote: true, class: 'action like_btn liked' do
-			=render 'posts/unlike'
+			=render 'shared/unlike'
 		%span.like_count
 			=model.like_count
 	-else
 		=link_to "/posts/#{model.id}/like", id: model.id, class: 'action like_btn', method: :post, remote: true do
-			=render 'posts/like'
+			=render 'shared/like'
 		%span.like_count
 			=model.like_count
 -else
 	=link_to signin_path do
-		=render 'posts/like'
+		=render 'shared/like'
 	%span.like_count
 		=model.like_count

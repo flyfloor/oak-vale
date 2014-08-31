@@ -182,6 +182,9 @@ quote:after{
 
 
 /*all pages basic*/
+.fa-heart{
+  color: #f88;
+}
 .greenlight{
   color: #51FF9D;
 }
@@ -195,11 +198,13 @@ quote:after{
 
 tag {
   background: #BBD3F7;
-  padding: 3px 8px;
-  border-radius: 40%;
+  padding: 2px 8px;
+  border-radius: 50%;
   font-size: 13px;
   margin-right: 5px;
   cursor: pointer;
+  display: inline-block;
+  margin:2px; 
 }
 
 a.action {
@@ -513,6 +518,7 @@ article textarea {
     text-align: center;
     float: left;
     min-height: 300px;
+    width: 220px;
     position: fixed;
     .stats {
       border-bottom: 1px solid #eee;
@@ -529,10 +535,20 @@ article textarea {
         border-left: 1px solid #eee;
       }
     }
+    .group{
+      .group-item{
+        margin: 5px;
+        img{
+          width: 30px;
+          height: 30px;
+          margin-bottom: 5px;
+        }
+      }
+    }
   }
   .user-posts{
     float: left;
-    margin-left: 220px;
+    margin-left: 230px;
     article{
       min-height: 400px;
     }

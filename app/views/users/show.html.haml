@@ -9,6 +9,13 @@
 		-if current_user? @user
 			%section.create-post
 				=link_to '创建图说', new_post_path, class: 'btn submit-btn'
+		.group
+			%h4 他的小组
+			-if @groups.present?
+				%ul
+					-@groups.each do |group|
+						%li.group-item
+							=render partial: 'groups/group', locals: {model: group}
 	%section.user-posts
 		%div
 			%section.his-posts

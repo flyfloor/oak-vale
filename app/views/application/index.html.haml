@@ -9,7 +9,7 @@
 			=will_paginate @feed
 		%aside.module
 			%h3.greenlight 快速入口
-			=link_to '写篇图挂', new_post_path, class: 'btn submit-btn'
+			=link_to '写篇图说', new_post_path, class: 'btn submit-btn'
 			%h4 
 				我的关注( 
 				=link_to current_user.followed_users.count, following_user_path(current_user)

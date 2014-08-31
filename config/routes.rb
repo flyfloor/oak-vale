@@ -50,9 +50,11 @@ OakVale::Application.routes.draw do
     resources :comments, only:[:create, :destroy]
   end
 
+  #actions
   post 'tags/:id/subscribe' => 'tags#subscribe'
   post 'groups/:id/join' => 'groups#join'
   post 'posts/:id/like' => 'posts#like'
+  post 'topics/:id/vote' => 'topics#vote'
 
   #tags
   resources :tags
