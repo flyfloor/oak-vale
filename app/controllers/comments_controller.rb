@@ -1,3 +1,4 @@
+#coding: utf-8
 class CommentsController < ApplicationController
 	before_filter :sign_in_user, only: [ :create, :destroy]
 	before_filter :find_post, only: [ :create, :destroy]

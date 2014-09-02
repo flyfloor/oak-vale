@@ -1,3 +1,4 @@
+#coding: utf-8
 class TopicsController < ApplicationController
 	before_filter :find_group, only: [:index, :new, :create, :show, :edit]
 	before_filter :find_topic, only: [:show, :edit, :update]
